@@ -1,7 +1,9 @@
 import ProductCards from "./ProductCards";
+import UserCards from "./UserCards";
 import { Separator } from "@/components/ui/separator";
 import Tab from "./Tab";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Products() {
   const products = [
@@ -79,6 +81,19 @@ function Products() {
     },
   ];
 
+  const [allUsers, getUsers] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://reqres.in/api/users?page=2")
+      .then((response) => {
+        getUsers(response.data.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching users:", error);
+      });
+  }, []);
+
   const categories = [
     { _id: "ALL", name: "All" },
     { _id: "1", name: "Headphones" },
@@ -88,15 +103,15 @@ function Products() {
     { _id: "5", name: "Smart Watches" },
   ];
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState("1");
+  const [selectedCategoryId, setSelectedCategoryId] = useState("ALL");
   const filteredProducts =
     selectedCategoryId === "ALL"
       ? products
       : products.filter((product) => product.categoryId === selectedCategoryId);
 
-    const handleTabClick = (_id) => {
-        setSelectedCategoryId(_id)
-    }
+  const handleTabClick = (_id) => {
+    setSelectedCategoryId(_id);
+  };
 
   return (
     <section className="px-8 py-8">
@@ -105,7 +120,7 @@ function Products() {
       <div className="mt-4 flex items-center gap-4">
         {categories.map((category) => (
           <Tab
-            key={category._id}  
+            key={category._id}
             _id={category._id}
             selectedCategoryId={selectedCategoryId}
             name={category.name}
@@ -114,6 +129,7 @@ function Products() {
         ))}
       </div>
       <ProductCards products={filteredProducts} />
+      <UserCards users={allUsers}/>
     </section>
   );
 }
