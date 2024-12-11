@@ -47,6 +47,39 @@ backend/
 |-- README.md
 ```
 
+### Main Frontend Directory Structure
+```plaintext
+frontend/
+|-- components/
+|   |-- ui/
+|   |   |-- badge.jsx
+|   |   |-- button.jsx
+|   |   |-- card.jsx
+|   |   |-- input.jsx
+|   |   |-- label.jsx
+|   |   |-- separator.jsx
+|-- lib/
+|-- pages/
+|   |-- App.jsx
+|   |-- Button.jsx
+|   |-- Greeting.jsx
+|   |-- Hero.css
+|   |-- Hero.jsx
+|   |-- index.css
+|   |-- main.jsx
+|   |-- Navigation.css
+|   |-- ProductCard.jsx
+|   |-- ProductCards.jsx
+|   |-- Products.jsx
+|   |-- Tab.jsx
+|-- .gitignore
+|-- components.json
+|-- eslint.config.js
+|-- index.html
+|-- jsconfig.json
+|-- package-lock.json
+```
+
 ### Description of Key Directories and Files
 
 #### **api/middleware/**
